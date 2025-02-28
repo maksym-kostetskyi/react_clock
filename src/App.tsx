@@ -36,26 +36,16 @@ export class Clock extends React.Component<ClockProps, ClockState> {
     this.setState({ today: now });
   };
 
-  stopTimer() {
-    window.clearInterval(this.state.timeTimerId);
-    //window.clearInterval(this.state.nameTimerId);
-  }
-
   componentDidMount(): void {
     const timeTimerId = window.setInterval(this.updateTime, 1000);
 
-    const nameTimerId = window.setInterval(() => {
-      this.setState({ clockName: getRandomName() });
-    }, 3300);
-
     this.setState({
       timeTimerId: timeTimerId,
-      nameTimerId: nameTimerId,
     });
   }
 
   componentWillUnmount(): void {
-    this.stopTimer();
+    window.clearInterval(this.state.timeTimerId);
   }
 
   render() {
